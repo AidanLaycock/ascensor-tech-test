@@ -40,6 +40,6 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('categories', CategoryController::class)->except('show');
 });
 
-Route::get('blog', fn() => \App\Models\BlogPost::published()->get());
+Route::get('blog', fn() => \App\Models\BlogPost::published()->get())->name('blog');
 
 require __DIR__.'/auth.php';
