@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Database\Factories\BlogPostFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Str;
+use \Illuminate\Database\Eloquent\Factories\Factory;
+
 
 class BlogPost extends Model
 {
@@ -18,14 +20,22 @@ class BlogPost extends Model
 
     protected static function booted(): void
     {
-        parent::boot();
-
-        static::saving(fn($model) => $model->url = Str::slug($model->title));
+        static::saving(fn($model) => $model->slug = Str::slug($model->title));
     }
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
 
     public function categories(): MorphMany
     {
         return $this->morphMany(Category::class, 'categorisable');
+    }
+
+    protected static function newFactory(): Factory
+    {
+        return BlogPostFactory::new();
     }
 
 }
