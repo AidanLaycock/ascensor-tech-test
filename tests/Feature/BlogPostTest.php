@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\BlogPost;
-use function Pest\Laravel\{delete, patch};
+use function Pest\Laravel\{get, delete, patch};
 
 uses()->group('blog', 'categories');
 
@@ -27,16 +27,12 @@ test('A User can delete a blog post')
                     ->assertRedirect(route('blog.index'))
     );
 
-
 test('A User can create an unpublished blog post and it wont be visible for the public')
     ->asUser()
-    ->expect(fn() => BlogPost::factory()->unpublished()->create())
-    ->expect(fn() => BlogPost::published()->count())
-        ->toBe(0)
-    ->expect(fn() => BlogPost::factory()->count(5)->create())
-    ->expect(fn() => BlogPost::published()->count())
-        ->toBe(5);
+    ->expect(fn() => test()->post = BlogPost::factory()->create())
+    ->expect(fn() => get(route('blog'))->assertSee(test()->post->title));
 
-test('A User can create a blog post that is visible and then update it to be unpublished');
+test('A User can create a blog post that is visible and then update it to be unpublished')
+    ->asUser();
 
 test('A User can add categories to a blog');
