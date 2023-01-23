@@ -11,6 +11,9 @@
 |
 */
 
+use Illuminate\Contracts\Auth\Authenticatable;
+use Tests\TestCase;
+
 uses(Tests\TestCase::class)->in('Unit','Feature');
 
 /*
@@ -39,7 +42,18 @@ expect()->extend('toBeOne', function () {
 |
 */
 //
-//function something()
-//{
-//    // ..
-//}
+
+function asUser() {
+    test()->user = \App\Models\User::factory()->create();
+    return test()->actingAs(test()->user);
+}
+
+/**
+ * Set the currently logged in user for the application.
+ *
+ * @return TestCase
+ */
+function actingAs(Authenticatable $user, string $driver = null)
+{
+    return test()->actingAs($user, $driver);
+}

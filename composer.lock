@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "04d8a4b89285384d64509ab86eaf65ee",
+    "content-hash": "29e9126dd6b8bd5e4dd78ddc925179c1",
     "packages": [
         {
             "name": "brick/math",
@@ -5497,6 +5497,95 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "defstudio/pest-plugin-laravel-expectations",
+            "version": "v1.10.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/defstudio/pest-plugin-laravel-expectations.git",
+                "reference": "1a82a1378dc256c30efa91e186538a704dd215b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/defstudio/pest-plugin-laravel-expectations/zipball/1a82a1378dc256c30efa91e186538a704dd215b7",
+                "reference": "1a82a1378dc256c30efa91e186538a704dd215b7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^7.0 || ^8.0 || ^9.0",
+                "illuminate/database": "^7.0 || ^8.0 || ^9.0",
+                "illuminate/http": "^7.0 || ^8.0 || ^9.0",
+                "illuminate/support": "^7.0 || ^8.0 || ^9.0",
+                "illuminate/testing": "^7.0 || ^8.0 || ^9.0",
+                "pestphp/pest": "^1.0",
+                "pestphp/pest-plugin": "^1.0",
+                "pestphp/pest-plugin-laravel": "^1.2",
+                "php": "^7.3 || ^8.0 || ^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.21 || ^7.0",
+                "pestphp/pest-dev-tools": "^v1.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Autoload.php"
+                ],
+                "psr-4": {
+                    "DefStudio\\PestLaravelExpectations\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabio Ivona",
+                    "email": "fabio.ivona@defstudio.it",
+                    "homepage": "https://defstudio.it",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Daniele Romeo",
+                    "email": "danieleromeo@defstudio.it",
+                    "homepage": "https://defstudio.it",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A plugin to add laravel tailored expectations to Pest",
+            "keywords": [
+                "expectations",
+                "framework",
+                "laravel",
+                "pest",
+                "php",
+                "plugin",
+                "test",
+                "testing",
+                "unit"
+            ],
+            "support": {
+                "issues": "https://github.com/defstudio/pest-plugin-laravel-expectations/issues",
+                "source": "https://github.com/defstudio/pest-plugin-laravel-expectations/tree/v1.10.5"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/defstudio",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/fabio-ivona",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-12-14T14:16:25+00:00"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "2.0.0",

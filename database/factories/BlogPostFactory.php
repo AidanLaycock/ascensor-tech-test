@@ -19,7 +19,7 @@ class BlogPostFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'content' => fake()->paragraph(),
-            'publish_at' => fake()->dateTimeBetween('now', '+1 year'),
+            'publish_at' => fake()->dateTimeBetween('-1 year', 'now')->format('Y-m-d H:i:s'),
             'status' => true
         ];
     }
