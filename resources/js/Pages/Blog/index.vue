@@ -1,15 +1,17 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import { router } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3'
 
 defineProps({ posts: Array });
 
 function deletePost(id)
 {
-    if(confirm("Are you sure you want to delete the blog post")) {
-        router.delete(route('blog.destroy', {'blog': id}));
-    }
+    router.delete(route('blog.destroy', {'blog': id}), {
+        onBefore: () => confirm("Are you sure you want to delete the blog post"),
+        onSuccess: () => alert('Post successfully deleted!')
+    });
 }
 </script>
 
@@ -24,10 +26,14 @@ function deletePost(id)
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">Blog Posts</div>
-
-                    {{ posts }}
-
+                    <div class="flex justify-between">
+                        <div class="p-6 text-gray-900">
+                            Blog Posts
+                        </div>
+                        <div class="p-6">
+                            <Link :href="route('blog.create')" as="button" type="button">+ Add new post</Link>
+                        </div>
+                    </div>
                     <div class="flex flex-col p-5">
                         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -82,7 +88,7 @@ function deletePost(id)
                                                 {{ post.updated_at }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                <a :href="route('blog.edit', post.id)">Edit Post</a>
+                                                <Link :href="route('blog.edit', post.id)">Edit Post</link>
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                 <button @click.prevent="deletePost(post.id)">Delete Post</button>
@@ -94,7 +100,6 @@ function deletePost(id)
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
