@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,7 +15,10 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Blog');
+        return Inertia::render('Blog', [
+            'posts' => BlogPost::select(['id', 'title', 'slug', 'publish_at', 'status', 'created_at', 'updated_at'])
+                                ->get()
+        ]);
     }
 
     /**

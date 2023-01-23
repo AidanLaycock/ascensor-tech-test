@@ -1,6 +1,16 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3'
+
+defineProps({ posts: Array });
+
+function deletePost(id)
+{
+    if(confirm("Are you sure you want to delete the blog post")) {
+        router.delete(route('blog.destroy', {'blog': id}));
+    }
+}
 </script>
 
 <template>
@@ -14,7 +24,77 @@ import { Head } from '@inertiajs/vue3';
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">Show table of blogs!</div>
+                    <div class="p-6 text-gray-900">Blog Posts</div>
+
+                    {{ posts }}
+
+                    <div class="flex flex-col p-5">
+                        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                <div class="overflow-hidden">
+                                    <table class="min-w-full">
+                                        <thead class="border-b">
+                                        <tr>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                #
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Title
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Slug
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Publish at
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Created at
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Last Updated
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Edit
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Delete
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="border-b" v-for="post in posts">
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                {{ post.id }}
+                                            </td>
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                {{ post.title }}
+                                            </td>
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                {{ post.slug }}
+                                            </td>
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                {{ post.publish_at }}
+                                            </td>
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                {{ post.created_at }}
+                                            </td>
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                {{ post.updated_at }}
+                                            </td>
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                <a :href="route('blog.edit', post.id)">Edit Post</a>
+                                            </td>
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                <button @click.prevent="deletePost(post.id)">Delete Post</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
