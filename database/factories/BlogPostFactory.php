@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\blogPost>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BlogPost>
  */
 class BlogPostFactory extends Factory
 {
@@ -14,12 +14,12 @@ class BlogPostFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence(),
-            'content' => $this->faker->paragraph(),
-            'publish_at' => $this->faker->dateTimeBetween('now', '+1 year'),
+            'title' => fake()->sentence(),
+            'content' => fake()->paragraph(),
+            'publish_at' => fake()->dateTimeBetween('now', '+1 year'),
             'status' => true
         ];
     }
