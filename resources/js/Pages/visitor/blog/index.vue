@@ -5,6 +5,7 @@ import ImageBanner from "@/Components/ImageBanner.vue";
 
 defineProps({
     posts: Array,
+    categories: Array
 });
 </script>
 
@@ -29,17 +30,8 @@ defineProps({
                 <div class="flex flex-wrap justify-start flex-grow mt-8 text-left">
                     <div class="w-full space-y-4 md:w-1/2">
                         <nav class="mb-10 list-none">
-                            <li>
-                                <a href="#">Email Templates</a>
-                            </li>
-                            <li>
-                                <a href=" #">Web Templates</a>
-                            </li>
-                            <li>
-                                <a href="#">Figma Files</a>
-                            </li>
-                            <li>
-                                <a href=" #">Sketch Files</a>
+                            <li v-for="category in categories">
+                                <a href="#">{{ category.name }}</a>
                             </li>
                         </nav>
                     </div>
