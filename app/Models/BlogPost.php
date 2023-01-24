@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Database\Factories\BlogPostFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Str;
 use \Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Builder;
@@ -38,9 +38,9 @@ class BlogPost extends Model
         return $this->where('publish_at', '<=', Carbon::now());
     }
 
-    public function categories(): MorphMany
+    public function categories(): MorphToMany
     {
-        return $this->morphMany(Category::class, 'categorisable');
+        return $this->morphToMany(Category::class, 'categorisable');
     }
 
     protected static function newFactory(): Factory

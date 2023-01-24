@@ -37,4 +37,11 @@ class BlogPostFactory extends Factory
            'publish_at' => null
         ]);
     }
+
+    public function withCategories(array $categories): self
+    {
+        return $this->state([
+            'categories' => $categories
+        ]);
+    }
 }

@@ -27,8 +27,9 @@ class BlogPostRequest extends FormRequest
         return [
             'title' => 'required|string',
             'content' => 'required|string',
-            'publish_at' => 'sometimes|date',
+            'publish_at' => 'sometimes|date|nullable',
             'status' => 'sometimes|boolean',
+            'categories' => 'sometimes|array'
         ];
     }
 }

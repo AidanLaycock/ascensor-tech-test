@@ -44,7 +44,8 @@ class BlogPostController extends Controller
      */
     public function store(BlogPostRequest $request): RedirectResponse
     {
-        BlogPost::create($request->validated());
+        $post = BlogPost::create($request->validated());
+        $request->has('categories') ? $post->categories()->create($request->categories) : null;
 
         return to_route('blog.index');
     }
@@ -83,6 +84,7 @@ class BlogPostController extends Controller
     public function update(BlogPostRequest $request, BlogPost $blog): RedirectResponse
     {
         $blog->update($request->validated());
+        $request->has('categories') ? $blog->categories()->updateOrCreate($request->categories) : null;
 
         return to_route('blog.index');
     }
@@ -90,7 +92,7 @@ class BlogPostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param BlogPost $blog
      * @return RedirectResponse
      */
     public function destroy(BlogPost $blog): RedirectResponse
