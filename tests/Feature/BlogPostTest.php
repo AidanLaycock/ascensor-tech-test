@@ -1,14 +1,14 @@
 <?php
 
 use App\Models\BlogPost;
-use function Pest\Laravel\{get, delete, patch};
+use function Pest\Laravel\{get, post, delete, patch};
 
 uses()->group('blog', 'categories');
 
 test('A User can create a new blog post')
     ->asUser()
     ->expect(fn() =>
-        test()->post(route('blog.store'), BlogPost::factory()->raw())
+            post(route('blog.store'), BlogPost::factory()->raw())
               ->assertRedirect(route('blog.index'))
     );
 
