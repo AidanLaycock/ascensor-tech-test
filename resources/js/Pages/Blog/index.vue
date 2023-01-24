@@ -1,8 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
-import { router } from '@inertiajs/vue3';
-import { Link } from '@inertiajs/vue3'
+import { Head,router, Link } from '@inertiajs/vue3';
 
 defineProps({ posts: Array });
 
