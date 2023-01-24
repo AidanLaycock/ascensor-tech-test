@@ -7,19 +7,27 @@ import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
 import Checkbox from "@/Components/Checkbox.vue";
 import Textarea from "@/Components/Textarea.vue";
+import Select from "@/Components/Select.vue";
 
-const props = defineProps({ post: Object });
+const props = defineProps({
+    post: Object,
+    categories: Array
+});
 
 const form = useForm({
     id: props.post?.id ?? null,
     title: props.post?.title ?? null,
     content: props.post?.content ?? null,
-    status: props.post?.status ?? null,
-    publish_at: props.post?.publish_at ?? null
+    status: props.post?.status ?? false,
+    publish_at: props.post?.publish_at ?? null,
+    categories: props.post?.categories ?? null
 });
 
 function submit() {
-    form.submit(form.id ? 'patch': 'post', form.id ? route('blog.update', form.id) : route('blog.store'), {
+    form.transform((data) => ({
+        ...data,
+        categories: (data.categories && data.categories.length > 0) ? data.categories.map(function(category) { return {'category_id': category.id};}) : null
+    })).submit(form.id ? 'patch': 'post', form.id ? route('blog.update', form.id) : route('blog.store'), {
         onSuccess: () => alert(form.id ? ('Post successfully updated!'): ('Post successfully created!'))
     });
 }
@@ -35,7 +43,7 @@ function submit() {
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">Blog Posts</div>
 
                     <div class="flex flex-col p-5">
@@ -78,6 +86,21 @@ function submit() {
                                         <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
                                             <div class="grid grid-cols-3 gap-6">
                                                 <div class="col-span-3 sm:col-span-2">
+                                                    <InputLabel for="categories" value="Select categories" />
+                                                    <Select
+                                                        id="categories"
+                                                        class="mt-1 block"
+                                                        v-model="form.categories"
+                                                        :temp="props.categories"
+                                                    />
+                                                    <InputError class="mt-2" :message="form.errors.categories" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
+                                            <div class="grid grid-cols-3 gap-6">
+                                                <div class="col-span-3 sm:col-span-2">
                                                     <label class="flex items-center">
                                                         <Checkbox name="status" v-model:checked="form.status" />
                                                         <span class="ml-2 text-sm text-gray-600">Status</span>
@@ -101,7 +124,6 @@ function submit() {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
 
                                     <div class="px-4 py-3 text-right sm:px-6">
