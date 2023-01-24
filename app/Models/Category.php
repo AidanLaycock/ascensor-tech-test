@@ -14,6 +14,12 @@ class Category extends Model
 
     protected $fillable = ['name', 'status'];
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+        'status' => 'boolean'
+    ];
+
     public function scopeActive(): Builder
     {
         return $this->where('status', true);
