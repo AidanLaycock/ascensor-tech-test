@@ -15,8 +15,8 @@ defineProps({
     <visitor-layout>
         <image-banner>Blog</image-banner>
         <section>
-            <div class="flex pt-5 pb-24 px-24">
-            <div class="w-3/4 lg:divide-y lg:divide-gray-100">
+            <div class="flex flex-col md:flex-row pt-5 pb-24 px-24">
+                <div class="sm:w-full md:w-3/4 lg:divide-y lg:divide-gray-100">
                 <div class="sm:flex lg:items-end group bg-gray-100 m-5 p-5" v-for="post in posts" v-bind:key="post.id">
                     <div>
                         <p class="text-lg font-medium leading-6">

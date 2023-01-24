@@ -13,8 +13,8 @@ defineProps({
     <visitor-layout>
         <image-banner>{{ $page.props.post.title }}</image-banner>
         <section>
-            <div class="flex pt-5 pb-24 px-24">
-                <div class="w-3/4 lg:divide-y lg:divide-gray-100">
+            <div class="flex flex-col md:flex-row pt-5 pb-24 px-24">
+                <div class="sm:w-full md:w-3/4 lg:divide-y lg:divide-gray-100">
                     <div class="sm:flex lg:items-end group bg-gray-100 m-5 p-5">
                         <div>
                             <h1 class="font-medium leading-6 text-xl text-gray-800 lg:text-2xl">{{ post.title }}</h1>
