@@ -30,5 +30,3 @@ test('A User can delete a category')
         ->assertRedirect(route('categories.index'))
     )->expect(fn() => test()->category->toArray())
         ->not->toBeInDatabase('categories');
-
-test('A User can see how many uses a category has');

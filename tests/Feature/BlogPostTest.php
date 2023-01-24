@@ -29,15 +29,15 @@ test('A User can delete a blog post')
 test('A User can create an unpublished blog post and it wont be visible for the public')
     ->asUser()
     ->expect(fn() => test()->post = BlogPost::factory()->create())
-    ->expect(fn() => get(route('blog'))->assertSee(test()->post->title));
+    ->expect(fn() => get('/')->assertSee(test()->post->title));
 
 test('A User can create a blog post that is visible and then update it to be unpublished')
     ->asUser()
     ->expect(fn() => test()->post = BlogPost::factory()->create())
-        ->expect(fn() => get(route('blog'))->assertSee(test()->post->title))
+        ->expect(fn() => get('/')->assertSee(test()->post->title))
     ->expect(fn() => test()->updatedData = BlogPost::factory()->unpublished()->raw())
     ->expect(fn() => patch(route('blog.update', ['blog' => test()->post->id]), test()->updatedData)->assertRedirect(route('blog.index')))
-    ->expect(fn() => get(route('blog'))->assertDontSee(test()->post->title));
+    ->expect(fn() => get('/')->assertDontSee(test()->post->title));
 
 test('A User can add categories to a blog')
     ->asUser()
