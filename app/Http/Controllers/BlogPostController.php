@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BlogPostRequest;
 use App\Models\BlogPost;
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Inertia\Inertia;
 
 class BlogPostController extends Controller
@@ -32,7 +31,8 @@ class BlogPostController extends Controller
     public function create()
     {
         return Inertia::render('Blog/edit', [
-            'post' => null
+            'post' => null,
+            'categories' => Category::active()->get(['*', 'id as category_id'])->toArray()
         ]);
     }
 
@@ -45,7 +45,7 @@ class BlogPostController extends Controller
     public function store(BlogPostRequest $request): RedirectResponse
     {
         $post = BlogPost::create($request->validated());
-        $request->has('categories') ? $post->categories()->create($request->categories) : null;
+        $request->has('categories') ? $post->categories()->sync($request->categories) : null;
 
         return to_route('blog.index');
     }
@@ -69,8 +69,11 @@ class BlogPostController extends Controller
      */
     public function edit(BlogPost $blog)
     {
+        $blog->load('categories');
+
         return Inertia::render('Blog/edit', [
-            'post' => $blog
+            'post' => $blog,
+            'categories' => Category::select('id as category_id')->active()->get()->toArray()
         ]);
     }
 
@@ -84,7 +87,7 @@ class BlogPostController extends Controller
     public function update(BlogPostRequest $request, BlogPost $blog): RedirectResponse
     {
         $blog->update($request->validated());
-        $request->has('categories') ? $blog->categories()->updateOrCreate($request->categories) : null;
+        $request->has('categories') ? $blog->categories()->sync($request->categories) : null;
 
         return to_route('blog.index');
     }
