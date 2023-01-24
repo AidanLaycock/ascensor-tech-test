@@ -91,7 +91,7 @@ function submit() {
                                                         id="categories"
                                                         class="mt-1 block"
                                                         v-model="form.categories"
-                                                        :temp="props.categories"
+                                                        :options="props.categories"
                                                     />
                                                     <InputError class="mt-2" :message="form.errors.categories" />
                                                 </div>
