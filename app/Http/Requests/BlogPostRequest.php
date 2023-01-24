@@ -29,7 +29,7 @@ class BlogPostRequest extends FormRequest
             'content' => 'required|string',
             'publish_at' => 'sometimes|date|nullable',
             'status' => 'sometimes|boolean',
-            'categories' => 'sometimes|array'
+            'categories' => 'sometimes|array|nullable',
         ];
     }
 }
