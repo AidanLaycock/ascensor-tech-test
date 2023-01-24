@@ -26,7 +26,7 @@ defineProps({
                 <div class="flex flex-wrap justify-start flex-grow mt-8 text-left">
                     <div class="w-full space-y-4 md:w-1/2">
                         <nav class="mb-10 list-none">
-                            <li v-for="category in post.categories" class="mb-3">
+                            <li v-for="category in post.categories" :key="category.id" class="mb-3">
                                 <a href="#">{{ category.name }}</a>
                             </li>
                         </nav>
