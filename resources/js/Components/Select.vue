@@ -5,8 +5,14 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
-const props = defineProps({options: Array});
+import {onMounted, ref} from 'vue'
+const props = defineProps(['options', 'modelValue']);
 
 const selected = ref([])
+
+onMounted(() => {
+    if(props.modelValue) {
+        selected.value = props.modelValue;
+    }
+});
 </script>
