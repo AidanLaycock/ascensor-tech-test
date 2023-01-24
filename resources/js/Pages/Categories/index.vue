@@ -89,6 +89,12 @@ function deleteCategory(id)
                                         </tr>
                                         </tbody>
                                     </table>
+
+                                    <div class="text-gray-500 text-center m-12" v-if="categories.length === 0">
+                                        <p>No Categories!</p>
+                                        <Link :href="route('categories.create')" as="button" type="button">Add new category</Link>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

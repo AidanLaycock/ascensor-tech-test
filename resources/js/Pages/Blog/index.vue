@@ -94,6 +94,12 @@ function deletePost(id)
                                         </tr>
                                         </tbody>
                                     </table>
+
+                                    <div class="text-gray-500 text-center m-12" v-if="posts.length === 0">
+                                        <p>No Posts!</p>
+                                        <Link :href="route('blog.create')" as="button" type="button">Add new post</Link>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
