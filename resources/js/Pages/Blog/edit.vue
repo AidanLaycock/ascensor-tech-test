@@ -20,7 +20,7 @@ const form = useForm({
     content: props.post?.content ?? null,
     status: props.post?.status ?? false,
     publish_at: props.post?.publish_at ?? null,
-    categories: props.post?.categories ?? null
+    categories: props.post?.categories.map(function(category) { delete category.pivot; return category; }) ?? null
 });
 
 function submit() {
